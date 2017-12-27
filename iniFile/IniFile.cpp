@@ -8,6 +8,7 @@
 
 CIniFile::CIniFile():m_bFileExist(FALSE)
 {
+
 }
 
 CIniFile::~CIniFile()
@@ -24,13 +25,13 @@ CIniFile::~CIniFile()
 			}
 			m_stfFile.Close();
 		}
-		
 	}
 	if(m_FileContainer.GetSize() > 0)
 	{
 		m_FileContainer.RemoveAll();
 	}
 }
+
 BOOL  CIniFile::Create(const CString & strFileName)
 {
 	m_bFileExist = FALSE;
@@ -41,9 +42,9 @@ BOOL  CIniFile::Create(const CString & strFileName)
 	{
 		TCHAR szError[1024];
 		ex.GetErrorMessage(szError, 1024);
-		
 		return m_bFileExist;
 	}
+
 	CString strFileLine;
 	while(m_bFileExist = m_stfFile.ReadString(strFileLine))
 	{
@@ -55,6 +56,7 @@ BOOL  CIniFile::Create(const CString & strFileName)
 	m_bFileExist = TRUE;
 	return m_bFileExist;
 }
+
 BOOL CIniFile::GetVar(const CString & strSection,const CString & strVarName,CString &strReturnValue)
 {
 	if(m_bFileExist == FALSE || m_FileContainer.GetSize() < 0)
@@ -70,10 +72,32 @@ BOOL CIniFile::GetVar(const CString & strSection,const CString & strVarName,CStr
 	}
 	return FALSE;
 }
+
+//************************************
+// Method:    GetVarStr
+// FullName:  CIniFile::GetVarStr
+// Access:    public 
+// Returns:   BOOL
+// Qualifier:得到变量字符串型数值
+// Parameter: const CString & strSection，输入节section名称
+// Parameter: const CString & strVarName，输入键key名称
+// Parameter: CString & strReturnValue，返回CString值
+//************************************
 BOOL CIniFile::GetVarStr(const CString & strSection,const CString & strVarName,CString &strReturnValue)
 {
 	return(GetVar(strSection,strVarName,strReturnValue));
 }
+
+//************************************
+// Method:    GetVarInt
+// FullName:  CIniFile::GetVarInt
+// Access:    public 
+// Returns:   BOOL
+// Qualifier:得到变量整数型数值
+// Parameter: const CString & strSection，输入节section名称
+// Parameter: const CString & strVarName，输入键key名称
+// Parameter: int & iValue，返回int值
+//************************************
 BOOL CIniFile::GetVarInt(const CString & strSection,const CString & strVarName,int & iValue)
 {
 	CString  strReturnVar;
@@ -86,6 +110,7 @@ BOOL CIniFile::GetVarInt(const CString & strSection,const CString & strVarName,i
 	}
 	return FALSE;
 }
+
 BOOL CIniFile::SetVar(const CString & strSection,const CString & strVarName,const CString & strVar,const int iType)
 {
 	if(m_bFileExist == FALSE )
@@ -159,18 +184,20 @@ BOOL CIniFile::SetVar(const CString & strSection,const CString & strVarName,cons
 	}
 	
 	return TRUE;
-
 }
+
 BOOL CIniFile::SetVarStr(const CString & strSection,const CString & strVarName,const CString & strValue,const int iType)
 {
 	return SetVar(strSection,strVarName,strValue,iType);
 }
+
 BOOL CIniFile::SetVarInt(const CString & strSection,const CString & strVarName,const int & iValue,const int iType)
 {
 	CString strVar;
 	strVar.Format("%d",iValue);
 	return (SetVar(strSection,strVarName,strVar,iType));
 }
+
 int CIniFile::SearchLine(const CString & strSection,const CString & strVarName)
 {
 
