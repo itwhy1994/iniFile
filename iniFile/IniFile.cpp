@@ -1,14 +1,15 @@
 /*==================================================================
-*  文件名:CIniFile类实现文件                                       *
-*  修改日期:                                                       * 
-*  作者:                                                           *  
-*                                                                  * 
+*  文件名:CIniFile类实现文件                                       * 
+*  作者:Why                                                        *  
+*  2017.12.27                                                      * 
 ====================================================================*/
 #include "stdafx.h"
 #include "IniFile.h"
+
 CIniFile::CIniFile():m_bFileExist(FALSE)
 {
 }
+
 CIniFile::~CIniFile()
 {
 	if(m_bFileExist)
@@ -19,8 +20,7 @@ CIniFile::~CIniFile()
 			for(int i = 0; i< m_FileContainer.GetSize();i++)
 			{
 				strParam = m_FileContainer[i];
-			//	m_stfFile.WriteString(strParam);
-				m_stfFile.WriteString(strParam+"\n");
+				m_stfFile.WriteString(strParam + "\n");
 			}
 			m_stfFile.Close();
 		}
